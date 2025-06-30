@@ -2,6 +2,7 @@ import { pgTable, text, serial, integer, boolean, real } from "drizzle-orm/pg-co
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
+console.log("✅ schema.ts loaded");
 export const strokePredictions = pgTable("stroke_predictions", {
   id: serial("id").primaryKey(),
   age: integer("age").notNull(),
