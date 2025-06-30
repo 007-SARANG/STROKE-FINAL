@@ -3,6 +3,8 @@ import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
 console.log("✅ schema.ts loaded");
+export const strokeAnalysisSchema = "BRO I AM HERE";
+
 export const strokePredictions = pgTable("stroke_predictions", {
   id: serial("id").primaryKey(),
   age: integer("age").notNull(),
