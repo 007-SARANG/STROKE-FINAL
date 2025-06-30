@@ -7,13 +7,16 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-2">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 medical-gradient rounded-xl flex items-center justify-center">
+            <div 
+              className="flex items-center space-x-3 mb-6 cursor-pointer group hover:scale-105 transition-transform duration-300"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <div className="w-12 h-12 medical-gradient rounded-xl flex items-center justify-center group-hover:shadow-lg transition-shadow duration-300">
                 <Brain className="text-white text-xl" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold">StrokeAI</h3>
-                <p className="text-slate-400">Advanced Risk Prediction</p>
+                <h3 className="text-2xl font-bold group-hover:text-blue-400 transition-colors duration-300">StrokeAI</h3>
+                <p className="text-slate-400 group-hover:text-slate-300 transition-colors duration-300">Advanced Risk Prediction</p>
               </div>
             </div>
             <p className="text-slate-300 mb-6 max-w-md">
@@ -94,7 +97,7 @@ export default function Footer() {
             </div>
           </div>
           <p className="text-slate-400">
-            &copy; 2024 StrokeAI. All rights reserved. This tool is for educational purposes 
+            &copy; 2025 SARANG. All rights reserved. This tool is for educational purposes 
             and should not replace professional medical advice.
           </p>
         </div>

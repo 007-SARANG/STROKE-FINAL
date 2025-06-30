@@ -13,15 +13,18 @@ export default function Header() {
     <header className="relative z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-700/50 shadow-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 medical-gradient rounded-xl flex items-center justify-center shadow-lg animate-glow">
+          <div 
+            className="flex items-center space-x-3 cursor-pointer group hover:scale-105 transition-transform duration-300"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            <div className="w-12 h-12 medical-gradient rounded-xl flex items-center justify-center shadow-lg animate-glow group-hover:shadow-xl transition-shadow duration-300">
               <Brain className="text-white text-xl" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent group-hover:from-blue-500 group-hover:to-cyan-500 transition-all duration-300">
                 StrokeAI
               </h1>
-              <p className="text-sm text-muted-foreground">Advanced Risk Prediction</p>
+              <p className="text-sm text-muted-foreground group-hover:text-blue-500 transition-colors duration-300">Advanced Risk Prediction</p>
             </div>
           </div>
           
