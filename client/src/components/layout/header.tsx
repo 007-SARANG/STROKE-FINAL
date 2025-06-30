@@ -53,7 +53,10 @@ export default function Header() {
               <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             </Button>
-            <Button className="medical-gradient text-white hover:shadow-lg transform hover:scale-105 transition-all duration-200 font-medium">
+            <Button 
+              className="medical-gradient text-white hover:shadow-lg transform hover:scale-105 transition-all duration-200 font-medium"
+              onClick={() => scrollToSection('prediction')}
+            >
               Get Report
             </Button>
           </nav>

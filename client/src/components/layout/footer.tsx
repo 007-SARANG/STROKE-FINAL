@@ -21,13 +21,28 @@ export default function Footer() {
               for better preventive care and improved outcomes.
             </p>
             <div className="flex space-x-4">
-              <Button variant="outline" size="icon" className="bg-slate-800 border-slate-700 hover:bg-blue-600 hover:border-blue-600">
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className="bg-slate-800 border-slate-700 hover:bg-blue-600 hover:border-blue-600 transition-all duration-300"
+                onClick={() => window.open('https://twitter.com', '_blank')}
+              >
                 <Twitter className="text-white" />
               </Button>
-              <Button variant="outline" size="icon" className="bg-slate-800 border-slate-700 hover:bg-blue-600 hover:border-blue-600">
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className="bg-slate-800 border-slate-700 hover:bg-blue-600 hover:border-blue-600 transition-all duration-300"
+                onClick={() => window.open('https://www.linkedin.com/in/sarang-arora', '_blank')}
+              >
                 <Linkedin className="text-white" />
               </Button>
-              <Button variant="outline" size="icon" className="bg-slate-800 border-slate-700 hover:bg-blue-600 hover:border-blue-600">
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className="bg-slate-800 border-slate-700 hover:bg-blue-600 hover:border-blue-600 transition-all duration-300"
+                onClick={() => window.open('https://www.github.com/007-SARANG', '_blank')}
+              >
                 <Github className="text-white" />
               </Button>
             </div>
@@ -36,25 +51,48 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Product</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">Features</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">Pricing</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">API</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">Documentation</a></li>
+              <li><a href="#prediction-form" onClick={(e) => {e.preventDefault(); document.getElementById('prediction-form')?.scrollIntoView({behavior:'smooth'});}} className="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Features</a></li>
+              <li><a href="#analytics" onClick={(e) => {e.preventDefault(); document.getElementById('analytics')?.scrollIntoView({behavior:'smooth'});}} className="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Analytics</a></li>
+              <li><a href="#prediction-form" onClick={(e) => {e.preventDefault(); document.getElementById('prediction-form')?.scrollIntoView({behavior:'smooth'});}} className="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">AI Prediction</a></li>
+              <li><a href="https://www.github.com/007-SARANG" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors duration-200">Documentation</a></li>
             </ul>
           </div>
           
           <div>
             <h4 className="text-lg font-semibold mb-4">Support</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">Help Center</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">Contact Us</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">Privacy Policy</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-white transition-colors duration-200">Terms of Service</a></li>
+              <li><a href="https://www.linkedin.com/in/sarang-arora" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors duration-200">Contact Developer</a></li>
+              <li><a href="mailto:sarang@example.com" className="text-slate-400 hover:text-white transition-colors duration-200">Email Support</a></li>
+              <li><a href="#" onClick={(e) => {e.preventDefault(); alert('Privacy: This app processes health data locally and doesn\'t store personal information.');}} className="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Privacy Policy</a></li>
+              <li><a href="#" onClick={(e) => {e.preventDefault(); alert('Terms: This is an educational tool. Please consult healthcare professionals for medical advice.');}} className="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Terms of Service</a></li>
             </ul>
           </div>
         </div>
         
         <div className="border-t border-slate-800 mt-12 pt-8 text-center">
+          <div className="mb-4">
+            <p className="text-lg font-semibold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              Made with ❤️ by SARANG
+            </p>
+            <div className="flex justify-center space-x-6 mt-2">
+              <a 
+                href="https://www.linkedin.com/in/sarang-arora" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium"
+              >
+                LinkedIn
+              </a>
+              <a 
+                href="https://www.github.com/007-SARANG" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium"
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
           <p className="text-slate-400">
             &copy; 2024 StrokeAI. All rights reserved. This tool is for educational purposes 
             and should not replace professional medical advice.

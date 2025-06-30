@@ -58,6 +58,12 @@ export default function HeroSection() {
             <Button 
               variant="outline"
               className="border-2 border-blue-600 text-blue-600 dark:text-blue-400 px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-slate-900 transition-all duration-300"
+              onClick={() => {
+                const demo = document.createElement('div');
+                demo.innerHTML = `<div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:20px;border-radius:10px;box-shadow:0 20px 50px rgba(0,0,0,0.3);z-index:9999;text-align:center;"><h3 style="margin:0 0 10px 0;color:#1e40af;">Demo Video</h3><p style="margin:0 0 15px 0;color:#64748b;">Interactive demo coming soon!</p><button onclick="this.parentElement.parentElement.remove()" style="padding:8px 16px;background:#1e40af;color:white;border:none;border-radius:6px;cursor:pointer;">Close</button></div>`;
+                document.body.appendChild(demo);
+                setTimeout(() => demo.remove(), 3000);
+              }}
             >
               <Play className="mr-3" />
               Watch Demo
