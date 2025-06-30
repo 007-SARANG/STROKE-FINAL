@@ -1,9 +1,9 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { strokeAnalysisSchema } from "../shared/schema";
+import * as schema from "../shared/schema";
 
-console.log("✅ strokeAnalysisSchema:", strokeAnalysisSchema);
+console.log("✅ Exports from schema:", Object.keys(schema));
 
 import { z } from "zod";
 
@@ -12,7 +12,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Stroke risk prediction endpoint
   app.post("/api/predict-stroke", async (req, res) => {
     try {
-      const validatedData = strokeAnalysisSchema.parse(req.body);
+      const validatedData = schema.strokeAnalysisSchema.parse(req.body);
       
       // Calculate stroke risk using algorithm based on medical research
       const riskScore = calculateStrokeRisk(validatedData);
@@ -75,38 +75,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
 function calculateStrokeRisk(data: any): number {
   let riskScore = 0;
   
-  // Age factor (highest weight) - based on medical research
   if (data.age >= 75) riskScore += 45;
   else if (data.age >= 65) riskScore += 35;
   else if (data.age >= 55) riskScore += 25;
   else if (data.age >= 45) riskScore += 15;
   else if (data.age >= 35) riskScore += 5;
 
-  // Medical conditions
   if (data.hypertension) riskScore += 25;
   if (data.heartDisease) riskScore += 30;
 
-  // Glucose level
   if (data.avgGlucoseLevel >= 200) riskScore += 20;
   else if (data.avgGlucoseLevel >= 140) riskScore += 15;
   else if (data.avgGlucoseLevel >= 100) riskScore += 8;
 
-  // BMI factor
   if (data.bmi) {
     if (data.bmi >= 35) riskScore += 15;
     else if (data.bmi >= 30) riskScore += 10;
     else if (data.bmi >= 25) riskScore += 5;
   }
 
-  // Smoking status
   if (data.smokingStatus === 'smokes') riskScore += 20;
   else if (data.smokingStatus === 'formerly smoked') riskScore += 8;
 
-  // Gender factor
   if (data.gender === 'Male' && data.age >= 45) riskScore += 5;
   if (data.gender === 'Female' && data.age >= 55) riskScore += 5;
 
-  // Work stress factor
   if (data.workType === 'Private' || data.workType === 'Self-employed') riskScore += 3;
 
   return Math.min(Math.round(riskScore), 100);
@@ -148,7 +141,6 @@ function generateRecommendations(data: any, riskScore: number): string[] {
   if (data.smokingStatus === 'smokes') recommendations.push('Immediate smoking cessation with professional support');
   if (data.bmi && data.bmi >= 30) recommendations.push('Achieve healthy weight through structured program');
   
-  // Universal recommendations
   recommendations.push('Engage in 150 minutes of moderate aerobic activity weekly');
   recommendations.push('Follow Mediterranean diet rich in omega-3 fatty acids');
   recommendations.push('Practice stress management techniques daily');
@@ -161,13 +153,11 @@ function generateRecommendations(data: any, riskScore: number): string[] {
 }
 
 function calculateConfidence(data: any): number {
-  let confidence = 85; // Base confidence
+  let confidence = 85;
   
-  // Reduce confidence for missing optional data
   if (!data.bmi) confidence -= 5;
   if (data.smokingStatus === 'Unknown') confidence -= 3;
   
-  // Increase confidence for complete data
   if (data.bmi && data.smokingStatus !== 'Unknown') confidence += 5;
   
   return Math.min(confidence, 95);
