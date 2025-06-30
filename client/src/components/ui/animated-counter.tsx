@@ -1,0 +1,43 @@
+import { useEffect, useState } from "react";
+
+interface AnimatedCounterProps {
+  value: number;
+  duration?: number;
+  prefix?: string;
+  suffix?: string;
+}
+
+export default function AnimatedCounter({ 
+  value, 
+  duration = 2000, 
+  prefix = "", 
+  suffix = "" 
+}: AnimatedCounterProps) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTime: number;
+    let animationFrame: number;
+
+    const updateCount = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      
+      setCount(Math.floor(progress * value));
+      
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(updateCount);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(updateCount);
+
+    return () => {
+      if (animationFrame) {
+        cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, [value, duration]);
+
+  return <span>{prefix}{count}{suffix}</span>;
+}
