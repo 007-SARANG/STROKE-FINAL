@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "stroke-final-frontend": {
+      "rootDirectory": "client"
+    }
+  },
+  "builds": [
+    {
+      "src": "client/index.html",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "client/dist"
+      }
+    }
+  ],
+  "ignoreCommand": "echo 'Ignore backend in frontend deployment'"
+}
