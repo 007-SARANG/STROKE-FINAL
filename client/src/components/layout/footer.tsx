@@ -65,9 +65,9 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Support</h4>
             <ul className="space-y-2">
               <li><a href="https://www.linkedin.com/in/sarang-arora" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors duration-200">Contact Developer</a></li>
-              <li><a href="mailto:sarang@example.com" className="text-slate-400 hover:text-white transition-colors duration-200">Email Support</a></li>
-              <li><a href="#" onClick={(e) => {e.preventDefault(); alert('Privacy: This app processes health data locally and doesn\'t store personal information.');}} className="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Privacy Policy</a></li>
-              <li><a href="#" onClick={(e) => {e.preventDefault(); alert('Terms: This is an educational tool. Please consult healthcare professionals for medical advice.');}} className="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Terms of Service</a></li>
+              <li><a href="mailto:sarangarora@gmail.com" className="text-slate-400 hover:text-white transition-colors duration-200">Email Support</a></li>
+              <li><a href="#" onClick={(e) => {e.preventDefault(); window.open('https://www.termsfeed.com/live/privacy-policy-generator', '_blank');}} className="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Privacy Policy</a></li>
+              <li><a href="#" onClick={(e) => {e.preventDefault(); window.open('https://www.termsfeed.com/live/terms-and-conditions-generator', '_blank');}} className="text-slate-400 hover:text-white transition-colors duration-200 cursor-pointer">Terms of Service</a></li>
             </ul>
           </div>
         </div>
