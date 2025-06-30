@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import * as schema from "../shared/schema";
+import { schema } from "./shared/schema";
 
 console.log("✅ Exports from schema:", Object.keys(schema));
 
