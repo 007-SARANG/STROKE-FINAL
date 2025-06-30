@@ -2,7 +2,8 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { strokeAnalysisSchema } from "../shared/schema";
-console.log("✅ strokeAnalysisSchema imported:", strokeAnalysisSchema);
+
+console.log("✅ strokeAnalysisSchema:", strokeAnalysisSchema);
 
 import { z } from "zod";
 
