@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useStrokePrediction } from "@/hooks/use-stroke-prediction";
-import { strokeAnalysisSchema, type StrokeAnalysisInput } from "@shared/schema";
+import { strokeAnalysisSchema, type StrokeAnalysisInput } from "@/shared-types/stroke-types";
 import LoadingRing from "@/components/ui/loading-ring";
 import ResultsDisplay from "@/components/sections/results-display";
 import { Calendar, Users, Heart, Droplet, Weight, Ban, Activity, Apple, UserCheck, Building } from "lucide-react";
