@@ -10,7 +10,7 @@ export default function Header() {
   };
 
   return (
-    <header className="relative z-50 glass-card border-b border-white/20 shadow-xl">
+    <header className="relative z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-700/50 shadow-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-3">

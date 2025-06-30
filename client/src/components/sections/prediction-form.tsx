@@ -46,9 +46,9 @@ export default function PredictionForm() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Input Form */}
-          <Card className="glass-card p-8 relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
-            {/* Animated border effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 animate-gradient opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-lg"></div>
+          <Card className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl p-8 relative overflow-hidden group hover:shadow-3xl transition-all duration-500">
+            {/* Subtle animated border effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 animate-gradient opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-lg"></div>
             <div className="relative z-10">
               <div className="mb-8">
                 <h3 className="text-3xl font-bold text-foreground mb-3 bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">

@@ -36,9 +36,9 @@ export default function ResultsDisplay({ prediction }: ResultsDisplayProps) {
   };
 
   return (
-    <Card className="glass-card p-8 animate-slide-up relative overflow-hidden group">
-      {/* Premium gradient border effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 animate-gradient opacity-0 group-hover:opacity-30 transition-opacity duration-700 rounded-lg blur-sm"></div>
+    <Card className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/50 dark:border-slate-700/50 shadow-2xl p-8 animate-slide-up relative overflow-hidden group">
+      {/* Subtle gradient border effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 animate-gradient opacity-0 group-hover:opacity-15 transition-opacity duration-700 rounded-lg blur-sm"></div>
       <div className="relative z-10">
         <div className="mb-8">
           <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-3">
