@@ -52,20 +52,22 @@ export class MemStorage implements IStorage {
   }
 
   async createStrokePrediction(insertPrediction: InsertStrokePrediction): Promise<StrokePrediction> {
-    const id = this.currentPredictionId++;
-    const prediction: StrokePrediction = { 
-      ...insertPrediction,
-      id,
-      hypertension: insertPrediction.hypertension || false,
-      heartDisease: insertPrediction.heartDisease || false,
-      bmi: insertPrediction.bmi || null,
-      riskScore: null,
-      riskLevel: null,
-      predictions: null
-    };
-    this.strokePredictions.set(id, prediction);
-    return prediction;
-  }
+  const id = this.currentPredictionId++;
+
+  const prediction: StrokePrediction = { 
+    id,
+    ...insertPrediction,
+    hypertension: insertPrediction.hypertension ?? false,
+    heartDisease: insertPrediction.heartDisease ?? false,
+    bmi: insertPrediction.bmi ?? null,
+    riskScore: insertPrediction.riskScore ?? null,
+    riskLevel: insertPrediction.riskLevel ?? null,
+    predictions: insertPrediction.predictions ?? null,
+  };
+
+  this.strokePredictions.set(id, prediction);
+  return prediction;
+}
 
   async getStrokePredictions(): Promise<StrokePrediction[]> {
     return Array.from(this.strokePredictions.values());
