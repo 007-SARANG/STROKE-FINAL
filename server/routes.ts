@@ -10,57 +10,60 @@ import { z } from "zod";
 export async function registerRoutes(app: Express): Promise<Server> {
   
   // Stroke risk prediction endpoint
-  app.post("/api/predict", async (req, res) => {
-    try {
-      const validatedData = schema.strokeAnalysisSchema.parse(req.body);
-      
-      // Calculate stroke risk using algorithm based on medical research
-      const riskScore = calculateStrokeRisk(validatedData);
-      const riskLevel = getRiskLevel(riskScore);
-      const riskFactors = analyzeTriggers(validatedData);
-      const recommendations = generateRecommendations(validatedData, riskScore);
-      
-      // Store prediction
-      try {
-        await storage.createStrokePrediction({
-          age: validatedData.age,
-          gender: validatedData.gender,
-          hypertension: validatedData.hypertension,
-          heartDisease: validatedData.heartDisease,
-          everMarried: validatedData.everMarried,
-          workType: validatedData.workType,
-          residenceType: validatedData.residenceType,
-          avgGlucoseLevel: validatedData.avgGlucoseLevel,
-          bmi: validatedData.bmi ?? null,
-          smokingStatus: validatedData.smokingStatus,
-          riskScore,
-          riskLevel,
-          predictions: JSON.stringify(riskFactors),
-        });
+ app.post("/api/predict", async (req, res) => {
+  try {
+    const validatedData = schema.strokeAnalysisSchema.parse(req.body);
 
-        res.json({
-          riskScore,
-          riskLevel,
-          riskFactors,
-          recommendations,
-          confidence: calculateConfidence(validatedData)
-        });
+    // Calculate stroke risk
+    const riskScore = calculateStrokeRisk(validatedData);
+    const riskLevel = getRiskLevel(riskScore);
+    const riskFactors = analyzeTriggers(validatedData);
+    const recommendations = generateRecommendations(validatedData, riskScore);
+    const confidence = calculateConfidence(validatedData);
 
-      } catch (error) {
-        console.error("🔥 Internal Server Error:", error);
-        if (error instanceof z.ZodError) {
-          res.status(400).json({ 
-          error: "Invalid input data", 
-          details: error.errors 
-        });
-      } else {
-        res.status(500).json({ 
-          error: "Prediction calculation failed",
-          message: (error as Error).message,
-          stack: (error as Error).stack
-        });
-      }
+    // Store prediction
+    await storage.createStrokePrediction({
+      age: validatedData.age,
+      gender: validatedData.gender,
+      hypertension: validatedData.hypertension,
+      heartDisease: validatedData.heartDisease,
+      everMarried: validatedData.everMarried,
+      workType: validatedData.workType,
+      residenceType: validatedData.residenceType,
+      avgGlucoseLevel: validatedData.avgGlucoseLevel,
+      bmi: validatedData.bmi ?? null,
+      smokingStatus: validatedData.smokingStatus,
+      riskScore,
+      riskLevel,
+      predictions: JSON.stringify(riskFactors),
+    });
+
+    // Respond
+    res.json({
+      riskScore,
+      riskLevel,
+      riskFactors,
+      recommendations,
+      confidence,
+    });
+
+  } catch (error) {
+    console.error("🔥 Prediction Error:", error);
+    if (error instanceof z.ZodError) {
+      res.status(400).json({
+        error: "Invalid input data",
+        details: error.errors,
+      });
+    } else {
+      res.status(500).json({
+        error: "Prediction calculation failed",
+        message: (error as Error).message,
+        stack: (error as Error).stack,
+      });
     }
+  }
+});
+
 
 
   // Get analytics data
