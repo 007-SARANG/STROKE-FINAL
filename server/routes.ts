@@ -21,12 +21,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const recommendations = generateRecommendations(validatedData, riskScore);
       
       // Store prediction
-      await storage.createStrokePrediction({
+      try {
+        await storage.createStrokePrediction({
         ...validatedData,
         riskScore,
         riskLevel,
-        predictions: riskFactors, // or JSON.stringify(riskFactors) if your schema expects a string
+        predictions: JSON.stringify(riskFactors), // or riskFactors if array is accepted
       });
+    } catch (err) {
+      console.error("❌ Failed to store prediction:", err);
+      throw err;
+    }
 
 
       res.json({
