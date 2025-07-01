@@ -51,19 +51,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         recommendations,
         confidence: calculateConfidence(validatedData)
       });
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        res.status(400).json({ 
-          error: "Invalid input data", 
-          details: error.errors 
-        });
-      } else {
-        res.status(500).json({ 
-          error: "Prediction calculation failed" 
-        });
-      }
+   } catch (error) {
+     console.error("🔥 Internal Server Error:", error);
+     if (error instanceof z.ZodError) {
+       res.status(400).json({ 
+        error: "Invalid input data", 
+        details: error.errors 
+      });
+    } else {
+      res.status(500).json({ 
+        error: "Prediction calculation failed",
+        message: (error as Error).message,
+        stack: (error as Error).stack
+      });
     }
-  });
+  }
+
 
   // Get analytics data
   app.get("/api/analytics", async (req, res) => {
