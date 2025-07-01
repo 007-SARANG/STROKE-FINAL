@@ -10,7 +10,7 @@ import { z } from "zod";
 export async function registerRoutes(app: Express): Promise<Server> {
   
   // Stroke risk prediction endpoint
-  app.post("/api/predict-stroke", async (req, res) => {
+  app.post("/api/predict", async (req, res) => {
     try {
       const validatedData = schema.strokeAnalysisSchema.parse(req.body);
       
