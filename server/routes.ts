@@ -23,49 +23,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Store prediction
       try {
         await storage.createStrokePrediction({
-        age: validatedData.age,
-        gender: validatedData.gender,
-        hypertension: validatedData.hypertension,
-        heartDisease: validatedData.heartDisease,
-        everMarried: validatedData.everMarried,
-        workType: validatedData.workType,
-        residenceType: validatedData.residenceType,
-        avgGlucoseLevel: validatedData.avgGlucoseLevel,
-        bmi: validatedData.bmi ?? null,
-        smokingStatus: validatedData.smokingStatus,
-        riskScore,
-        riskLevel,
-        predictions: JSON.stringify(riskFactors), // match DB schema type
-      });
+          age: validatedData.age,
+          gender: validatedData.gender,
+          hypertension: validatedData.hypertension,
+          heartDisease: validatedData.heartDisease,
+          everMarried: validatedData.everMarried,
+          workType: validatedData.workType,
+          residenceType: validatedData.residenceType,
+          avgGlucoseLevel: validatedData.avgGlucoseLevel,
+          bmi: validatedData.bmi ?? null,
+          smokingStatus: validatedData.smokingStatus,
+          riskScore,
+          riskLevel,
+          predictions: JSON.stringify(riskFactors),
+        });
 
-    } catch (err) {
-      console.error("❌ Failed to store prediction:", err);
-      throw err;
+        res.json({
+          riskScore,
+          riskLevel,
+          riskFactors,
+          recommendations,
+          confidence: calculateConfidence(validatedData)
+        });
+
+      } catch (error) {
+        console.error("🔥 Internal Server Error:", error);
+        if (error instanceof z.ZodError) {
+          res.status(400).json({ 
+          error: "Invalid input data", 
+          details: error.errors 
+        });
+      } else {
+        res.status(500).json({ 
+          error: "Prediction calculation failed",
+          message: (error as Error).message,
+          stack: (error as Error).stack
+        });
+      }
     }
-
-
-      res.json({
-        riskScore,
-        riskLevel,
-        riskFactors,
-        recommendations,
-        confidence: calculateConfidence(validatedData)
-      });
-   } catch (error) {
-     console.error("🔥 Internal Server Error:", error);
-     if (error instanceof z.ZodError) {
-       res.status(400).json({ 
-        error: "Invalid input data", 
-        details: error.errors 
-      });
-    } else {
-      res.status(500).json({ 
-        error: "Prediction calculation failed",
-        message: (error as Error).message,
-        stack: (error as Error).stack
-      });
-    }
-  }
 
 
   // Get analytics data
