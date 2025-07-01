@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { schema } from "./shared/schema";
+import { strokeAnalysisSchema } from "./shared/schema";
 
 console.log("✅ Exports from schema:", Object.keys(schema));
 
