@@ -3,8 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { strokeAnalysisSchema } from "./shared/schema";
 
-console.log("✅ Exports from schema:", Object.keys(schema));
-
+console.log("✅ strokeAnalysisSchema loaded");
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -12,7 +11,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Stroke risk prediction endpoint
  app.post("/api/predict", async (req, res) => {
   try {
-    const validatedData = schema.strokeAnalysisSchema.parse(req.body);
+    const validatedData = strokeAnalysisSchema.parse(req.body);
 
     // Calculate stroke risk
     const riskScore = calculateStrokeRisk(validatedData);
