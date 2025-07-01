@@ -21,7 +21,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const recommendations = generateRecommendations(validatedData, riskScore);
       
       // Store prediction
-      await storage.createStrokePrediction(validatedData);
+      await storage.createStrokePrediction({
+        ...validatedData,
+        riskScore,
+        riskLevel,
+        predictions: riskFactors, // or JSON.stringify(riskFactors) if your schema expects a string
+      });
+
 
       res.json({
         riskScore,
