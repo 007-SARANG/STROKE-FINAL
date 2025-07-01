@@ -23,11 +23,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Store prediction
       try {
         await storage.createStrokePrediction({
-        ...validatedData,
+        age: validatedData.age,
+        gender: validatedData.gender,
+        hypertension: validatedData.hypertension,
+        heartDisease: validatedData.heartDisease,
+        everMarried: validatedData.everMarried,
+        workType: validatedData.workType,
+        residenceType: validatedData.residenceType,
+        avgGlucoseLevel: validatedData.avgGlucoseLevel,
+        bmi: validatedData.bmi ?? null,
+        smokingStatus: validatedData.smokingStatus,
         riskScore,
         riskLevel,
-        predictions: JSON.stringify(riskFactors), // or riskFactors if array is accepted
+        predictions: JSON.stringify(riskFactors), // match DB schema type
       });
+
     } catch (err) {
       console.error("❌ Failed to store prediction:", err);
       throw err;
